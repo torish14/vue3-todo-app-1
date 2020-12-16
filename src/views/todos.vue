@@ -5,6 +5,7 @@
       v-for="todo in todoStore.state.todos"
       :key="todo.id"
       :todo="todo"
+      @click-delete="clickDelete"
     >
     </todo-item>
   </ul>
@@ -24,6 +25,10 @@ export default defineComponent({
     const todoStore = inject(todoKey)
     if (!todoStore) {
       throw new Error('todoStore is not provided')
+    }
+
+    const clickDelete = (id: number) => {
+      todoStore.deleteTodo(id)
     }
 
     return {

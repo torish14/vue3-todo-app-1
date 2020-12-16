@@ -22,10 +22,10 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['delete'],
+  emits: ['clickDelete'],
   setup(props, { emit }) {
     const clickDelete = () => {
-      emit('delete', props.todo.id)
+      emit('clickDelete', props.todo.id)
     }
 
     const formatDate = computed(() => {

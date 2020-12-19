@@ -36,7 +36,7 @@ export default defineComponent({
     }
 
     const clickTitle = (id: number) => {
-      router.push(`/edit${id}`)
+      router.push(`/edit/${id}`)
     }
 
     return {

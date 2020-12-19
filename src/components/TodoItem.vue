@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div>
-      <span class="title">{{ todo.title }}</span>
+      <span class="title" @click="clickTitle">{{ todo.title }}</span>
       <span class="status" :class="todo.status">{{ todo.status }}</span>
     </div>
     <div class="body">作成日：{{ formatDate }}</div>
@@ -14,7 +14,8 @@
 
 <script lang="ts">
 import { Todo } from '@/store/todo/types'
-import { computed, defineComponent, PropType } from 'vue'
+import { defineComponent, PropType } from 'vue'
+import { useFormatDate } from '@/composables/use-formate-date'
 export default defineComponent({
   props: {
     todo: {
@@ -22,20 +23,21 @@ export default defineComponent({
       required: true,
     },
   },
-  emits: ['clickDelete'],
+  emits: ['clickDelete', 'clickTitle'],
   setup(props, { emit }) {
     const clickDelete = () => {
       emit('clickDelete', props.todo.id)
     }
 
-    const formatDate = computed(() => {
-      return `${props.todo.createdAt.getFullYear()}/${
-        props.todo.createdAt.getMonth() + 1
-      }/${props.todo.createdAt.getDate()}`
-    })
+    const clickTitle = () => {
+      emit('clickTitle')
+    }
+
+    const formatDate = useFormatDate(props.todo.createdAt)
 
     return {
       clickDelete,
+      clickTitle,
       formatDate,
     }
   },

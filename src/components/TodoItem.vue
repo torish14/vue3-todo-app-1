@@ -30,7 +30,7 @@ export default defineComponent({
     }
 
     const clickTitle = () => {
-      emit('clickTitle')
+      emit('clickTitle', props.todo.id)
     }
 
     const formatDate = useFormatDate(props.todo.createdAt)

@@ -4,9 +4,14 @@ import { TodoClientInterface } from './types'
 export class TodoClient implements TodoClientInterface {
   getAll() {
     return Promise.resolve(
-      Object.keys(localStorage).map((key) => {
-        return JSON.parse(localStorage.getItem(key) as string) as Todo
-      })
+      Object.keys(localStorage)
+        .filter((key) => !isNaN(Number(key)))
+        .map((key) => {
+          const todo = JSON.parse(localStorage.getItem(key) as string) as Todo
+          todo.createdAt = new Date(todo.createdAt)
+          todo.updatedAt = new Date(todo.updatedAt)
+          return todo
+        })
     )
   }
 

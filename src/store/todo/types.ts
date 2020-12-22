@@ -17,6 +17,8 @@ export interface TodoState {
 
 export interface TodoStore {
   state: DeepReadonly<TodoState>
+  fetchTodos: () => void
+  fetchTodo: (id: number) => void
   getTodo: (id: number) => Todo
   addTodo: (todo: Partial<Todo>) => void
   updateTodo: (id: number, todo: Todo) => void

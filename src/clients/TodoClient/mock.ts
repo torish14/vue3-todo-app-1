@@ -28,7 +28,7 @@ const mockTodo: Todo[] = [
   },
 ]
 
-export class TodoClient implements TodoClientInterface {
+export class MockTodoClient implements TodoClientInterface {
   async getAll() {
     return Promise.resolve(mockTodo)
   }

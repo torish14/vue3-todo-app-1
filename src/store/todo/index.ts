@@ -1,5 +1,5 @@
 import { InjectionKey, reactive, readonly } from 'vue'
-import { Todo, TodoState, TodoStore } from '@/store/todo/types'
+import { Todo, Params, TodoState, TodoStore } from '@/store/todo/types'
 import Repository, { TODOS } from '@/clients/RepositoryFactory'
 const TodoRepository = Repository[TODOS]
 
@@ -24,7 +24,7 @@ const getTodo = (id: number) => {
   return todo
 }
 
-const addTodo = async (todo: Partial<Todo>) => {
+const addTodo = async (todo: Params) => {
   const result = await TodoRepository.create(todo)
   state.todos.push(result)
 }

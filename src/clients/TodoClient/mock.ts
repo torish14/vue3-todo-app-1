@@ -1,4 +1,4 @@
-import { Todo } from '@/store/todo/types'
+import { Todo, Params } from '@/store/todo/types'
 import { TodoClientInterface } from './types'
 
 const mockTodo: Todo[] = [
@@ -42,7 +42,7 @@ export class MockTodoClient implements TodoClientInterface {
     return Promise.resolve(todo)
   }
 
-  create(params: Partial<Todo>) {
+  create(params: Params) {
     const todo = this.intitializeTodo(params)
     return Promise.resolve(todo)
   }
@@ -57,11 +57,15 @@ export class MockTodoClient implements TodoClientInterface {
     return Promise.resolve()
   }
 
-  intitializeTodo(todo: Partial<Todo>) {
+  intitializeTodo(todo: Params) {
     const date = new Date()
-    todo.id = date.getTime()
-    todo.createdAt = date
-    todo.updatedAt = date
-    return todo as Todo
+    return {
+      id: date.getTime(),
+      title: todo.title,
+      description: todo.description,
+      status: todo.status,
+      createdAt: date,
+      updatedAt: date,
+    } as Todo
   }
 }

@@ -25,14 +25,8 @@
 <script lang="ts">
 import { defineComponent, inject, reactive } from 'vue'
 import { useRouter } from 'vue-router'
-import { Status } from '@/store/todo/types'
+import { Params } from '@/store/todo/types'
 import { todoKey } from '@/store/todo'
-
-export interface Data {
-  title: string
-  description: string
-  status: Status
-}
 
 export default defineComponent({
   setup() {
@@ -43,7 +37,7 @@ export default defineComponent({
 
     const router = useRouter()
 
-    const data = reactive<Data>({
+    const data = reactive<Params>({
       title: '',
       description: '',
       status: 'waiting',

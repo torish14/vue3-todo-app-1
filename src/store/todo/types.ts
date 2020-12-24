@@ -11,6 +11,8 @@ export interface Todo {
   updatedAt: Date
 }
 
+export type Params = Pick<Todo, 'title' | 'description' | 'status'>
+
 export interface TodoState {
   todos: Todo[]
 }
@@ -20,7 +22,7 @@ export interface TodoStore {
   fetchTodos: () => void
   fetchTodo: (id: number) => void
   getTodo: (id: number) => Todo
-  addTodo: (todo: Partial<Todo>) => void
+  addTodo: (todo: Params) => void
   updateTodo: (id: number, todo: Todo) => void
   deleteTodo: (id: number) => void
 }

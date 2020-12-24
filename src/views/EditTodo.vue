@@ -28,14 +28,8 @@
 <script lang="ts">
 import { defineComponent, inject, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { Status } from '@/store/todo/types'
+import { Params } from '@/store/todo/types'
 import { todoKey } from '@/store/todo'
-
-export interface Data {
-  title: string
-  description: string
-  status: Status
-}
 
 export default defineComponent({
   setup() {
@@ -51,7 +45,7 @@ export default defineComponent({
     try {
       const todo = todoStore.getTodo(id)
 
-      const data = reactive<Data>({
+      const data = reactive<Params>({
         title: todo.title,
         description: todo.description,
         status: todo.status,
@@ -60,12 +54,10 @@ export default defineComponent({
       const onSubmit = () => {
         const { title, description, status } = data
         todoStore.updateTodo(id, {
-          id: todo.id,
+          ...todo,
           title,
           description,
           status,
-          createdAt: todo.createdAt,
-          updatedAt: new Date(),
         })
         router.push('/')
       }
